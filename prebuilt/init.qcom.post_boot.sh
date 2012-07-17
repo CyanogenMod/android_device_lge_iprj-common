@@ -26,7 +26,7 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-target=`getprop ro.product.device`
+target=`getprop ro.cm.device`
 case "$target" in
 #platform.team@lge.com
     "msm8660_surf" | "msm8660_csfb" | "i_atnt" | "hdk_8x60" | "i_skt" | "i_dcm" | "p930" | "su640" )
@@ -43,28 +43,6 @@ case "$target" in
 	 echo 1 > /sys/module/pm_8x60/modes/cpu1/power_collapse/idle_enabled
 	 echo 1 > /sys/module/pm_8x60/modes/cpu0/standalone_power_collapse/idle_enabled
 	 echo 1 > /sys/module/pm_8x60/modes/cpu1/standalone_power_collapse/idle_enabled
-# cpufreq ondemand gov
-	 echo "ondemand" > /sys/devices/system/cpu/cpu0/cpufreq/scaling_governor
-	 echo "ondemand" > /sys/devices/system/cpu/cpu1/cpufreq/scaling_governor
-	 echo 50000 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-	 echo 90 > /sys/devices/system/cpu/cpufreq/ondemand/up_threshold
-	 chown system /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-	 echo 1 > /sys/devices/system/cpu/cpufreq/ondemand/io_is_busy
-	 echo 4 > /sys/devices/system/cpu/cpufreq/ondemand/sampling_down_factor
-	 chown system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
-#	 echo 384000 > /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-#	 echo 384000 > /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-	 chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq
-	 chown system /sys/devices/system/cpu/cpu0/cpufreq/scaling_min_freq
-	 chown system /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq
-	 chown system /sys/devices/system/cpu/cpu1/cpufreq/scaling_min_freq
-# cpufreq interactive governor: timer 20ms, min sample 20ms, hispeed 700MHz
-#         echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/timer_rate
-#         echo 20000 > /sys/devices/system/cpu/cpufreq/interactive/min_sample_time
-#         echo 600000 > /sys/devices/system/cpu/cpufreq/interactive/hispeed_freq
-#
-         echo 600000 > /sys/devices/system/cpu/cpu0/cpufreq/screen_off_max_freq
-
 	 chown root.system /sys/devices/system/cpu/mfreq
 	 chmod 220 /sys/devices/system/cpu/mfreq
 	 chown root.system /sys/devices/system/cpu/cpu1/online
@@ -94,7 +72,7 @@ esac
 case "$target" in
     "p930" | "su640" )
         if [ "`getprop gsm.version.baseband`" == "" ]; then
-            setprop gsm.version.baseband `dd if=/dev/block/mmcblk0p14 bs=128000 skip=4 count=3 | strings |grep "MDM92" | head -1`
+            setprop gsm.version.baseband `dd if=/dev/block/mmcblk0p14 bs=128000 count=10 | strings |grep -- "-MDM92" | head -1`
         fi
     ;;
 esac

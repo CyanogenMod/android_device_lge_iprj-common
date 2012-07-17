@@ -14,7 +14,12 @@
 
 
 LOCAL_PATH:= $(call my-dir)
+$(shell mkdir -p $(OUT)/obj/SHARED_LIBRARIES/libnv_intermediates/)
+$(shell touch $(OUT)/obj/SHARED_LIBRARIES/libnv_intermediates/export_includes)
+$(shell mkdir -p $(OUT)/obj/SHARED_LIBRARIES/liboncrpc_intermediates/)
+$(shell touch $(OUT)/obj/SHARED_LIBRARIES/liboncrpc_intermediates/export_includes)
 include $(CLEAR_VARS)
+
 
 LOCAL_MODULE_TAGS := optional
 

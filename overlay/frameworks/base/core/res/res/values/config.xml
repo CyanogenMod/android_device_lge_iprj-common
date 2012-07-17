@@ -26,12 +26,6 @@
     <!-- The default iface on which to monitor data use -->
     <string name="config_datause_iface">rmnet_sdio0</string>
 
-    <!-- Component name of the service providing network location support. -->
-    <string name="config_networkLocationProvider">com.google.android.location.NetworkLocationProvider</string>
-
-    <!-- Component name of the service providing geocoder API support. -->
-    <string name="config_geocodeProvider">com.google.android.location.GeocodeProvider</string>
-
     <bool name="config_automatic_brightness_available">true</bool>
 
     <!-- These are all dummies, but need to be present to enable UI control of auto-brightness
@@ -80,7 +74,7 @@
         <item>255</item>
         <item>255</item>
         <item>255</item>
-        <item>0</item>
+        <item>255</item>
     </integer-array>
 
     <!-- Array of output values for keyboard backlight corresponding to the LUX values
@@ -98,7 +92,7 @@
         <item>255</item>
         <item>255</item>
         <item>255</item>
-        <item>0</item>
+        <item>255</item>
     </integer-array>
 
     <!-- Boolean indicating if current platform supports quick switch-on/off of
@@ -162,10 +156,16 @@
                   specified -->
     <string name="default_wallpaper_component">com.android.phasebeam/.PhaseBeamWallpaper</string>
 
+    <!-- Menu+Home+Back -->
+<!--    <integer name="config_deviceHardwareKeys">7</integer> -->
+
     <bool name="config_autoBrightnessButtonKeyboard">false</bool>
 
-    <!-- Menu+Home+Back -->
-    <integer name="config_deviceHardwareKeys">7</integer>
+    <!-- Package name providing network location support. -->
+    <string name="config_networkLocationProviderPackageName" translatable="false">com.google.android.location</string>
+
+    <!-- Package name providing geocoder API support. -->
+    <string name="config_geocodeProviderPackageName" translatable="false">com.google.android.location</string>
 
     <bool translatable="false" name="config_wifi_p2p_support">true</bool>
 </resources>

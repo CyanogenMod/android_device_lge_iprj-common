@@ -21,7 +21,6 @@
 #include <linux/ioctl.h>
 #include <linux/types.h>
 
-
 struct ion_handle;
 /**
  * enum ion_heap_types - list of all possible types of heaps
@@ -77,6 +76,13 @@ enum ion_heap_ids {
 	ION_SYSTEM_HEAP_ID = 30,
 
 	ION_HEAP_ID_RESERVED = 31 /** Bit reserved for ION_SECURE flag */
+};
+
+enum ion_fixed_position {
+	NOT_FIXED,
+	FIXED_LOW,
+	FIXED_MIDDLE,
+	FIXED_HIGH,
 };
 
 /**
@@ -160,6 +166,9 @@ struct ion_platform_heap {
  *			of this heap in the case of a shared heap.
  * @reusable		Flag indicating whether this heap is reusable of not.
  *			(see FMEM)
+ * @mem_is_fmem		Flag indicating whether this memory is coming from fmem
+ *			or not.
+ * @fixed_position	If nonzero, position in the fixed area.
  * @virt_addr:		Virtual address used when using fmem.
  * @request_region:	function to be called when the number of allocations
  *			goes from 0 -> 1
@@ -174,6 +183,8 @@ struct ion_cp_heap_pdata {
 	ion_phys_addr_t secure_base; /* Base addr used when heap is shared */
 	size_t secure_size; /* Size used for securing heap when heap is shared*/
 	int reusable;
+	int mem_is_fmem;
+	enum ion_fixed_position fixed_position;
 	ion_virt_addr_t *virt_addr;
 	int (*request_region)(void *);
 	int (*release_region)(void *);
@@ -184,6 +195,9 @@ struct ion_cp_heap_pdata {
  * struct ion_co_heap_pdata - defines a carveout heap in the given platform
  * @adjacent_mem_id:	Id of heap that this heap must be adjacent to.
  * @align:		Alignment requirement for the memory
+ * @mem_is_fmem		Flag indicating whether this memory is coming from fmem
+ *			or not.
+ * @fixed_position	If nonzero, position in the fixed area.
  * @request_region:	function to be called when the number of allocations
  *			goes from 0 -> 1
  * @release_region:	function to be called when the number of allocations
@@ -194,6 +208,8 @@ struct ion_cp_heap_pdata {
 struct ion_co_heap_pdata {
 	int adjacent_mem_id;
 	unsigned int align;
+	int mem_is_fmem;
+	enum ion_fixed_position fixed_position;
 	int (*request_region)(void *);
 	int (*release_region)(void *);
 	void *(*setup_region)(void);

@@ -72,7 +72,7 @@ PRODUCT_PACKAGES += \
     gralloc.msm8660 \
     hwcomposer.msm8660 \
     copybit.msm8660 \
-    lights.msm8660 \
+    lights.iprj \
     gps.iprj \
     audio_policy.msm8660 \
     audio.a2dp.default \

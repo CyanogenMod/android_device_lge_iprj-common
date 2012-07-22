@@ -104,5 +104,30 @@ PRODUCT_PACKAGES += \
     charger \
     charger_res_images
 
+# Common properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.sf.lcd_density=320 \
+    mobiledata.interfaces=rmnet_sdio0,rmnet_sdio1 \
+    rild.libpath=/system/lib/libril-qc-qmi-1.so \
+    rild.libargs=-d /dev/smd0 \
+    DEVICE_PROVISIONED=1 \
+    ro.telephony.ril_class=LGEQualcommUiccRIL \
+    ro.telephony.ril.v3=qcomuiccstack \
+    wifi.interface=wlan0 \
+    debug.fb.rgb565=0 \
+    debug.sf.hw=1 \
+    debug.enabletr=true \
+    debug.composition.type=dyn \
+    persist.sys.usb.config=mtp,adb \
+    ro.opengles.version=131072 \
+    com.qc.hardware=true \
+    ro.sf.compbypass.enable=1 \
+    ro.hdmi.enable=true \
+    com.qc.hdmi_out=true \
+    ro.bt.bdaddr_path=/data/misc/bd_addr \
+    ro.product.camera=lgp930 \
+    dev.pm.dyn_samplingrate=1 \
+    ro.ril.shutdown=true
+
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_MANUFACTURER := LGE

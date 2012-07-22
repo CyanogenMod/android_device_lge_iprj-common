@@ -245,7 +245,7 @@ service hciattach /system/bin/init.qcom.bt.sh
     group bluetooth net_bt_admin
     disabled
 
-on property:service.brcm.bt.mac=*
+on property:dev.bootcomplete=1
     exec /system/bin/hwaddrs
 
 service ami304d /system/bin/ami304d

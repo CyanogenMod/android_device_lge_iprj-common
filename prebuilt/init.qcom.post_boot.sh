@@ -29,7 +29,7 @@
 target=`getprop ro.product.device`
 case "$target" in
 #platform.team@lge.com
-    "msm8660_surf" | "msm8660_csfb" | "i_atnt" | "hdk_8x60" | "i_skt" | "i_dcm" | "p930" )
+    "msm8660_surf" | "msm8660_csfb" | "i_atnt" | "hdk_8x60" | "i_skt" | "i_dcm" | "p930" | "su640" )
 	 echo 1 > /sys/module/rpm_resources/enable_low_power/L2_cache
 	 echo 1 > /sys/module/rpm_resources/enable_low_power/pxo
 	 echo 2 > /sys/module/rpm_resources/enable_low_power/vdd_dig
@@ -85,16 +85,16 @@ esac
 
 # Post-setup services
 case "$target" in
-    "msm8660_surf" | "msm8660_csfb" | "i_atnt" | "hdk_8x60" | "i_skt" | "i_dcm" | "p930" )
+    "msm8660_surf" | "msm8660_csfb" | "i_atnt" | "hdk_8x60" | "i_skt" | "i_dcm" | "p930" | "su640" )
         start mpdecision
         start thermald
     ;;
 esac
 
 case "$target" in
-    "p930" )
+    "p930" | "su640" )
         if [ "`getprop gsm.version.baseband`" == "" ]; then
-            setprop gsm.version.baseband `dd if=/dev/block/mmcblk0p14 bs=25469 skip=32 count=1 | strings |grep "^P9" | head -1`
+            setprop gsm.version.baseband `dd if=/dev/block/mmcblk0p14 bs=128000 skip=4 count=3 | strings |grep "MDM92" | head -1`
         fi
     ;;
 esac

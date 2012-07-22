@@ -182,3 +182,4 @@
 /dev/rfkill               0660   wifi       wifi
 
 /dev/ion                  0664   system     system
+/dev/pn544                0664   nfc        system

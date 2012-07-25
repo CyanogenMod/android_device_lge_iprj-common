@@ -94,7 +94,7 @@ esac
 case "$target" in
     "p930" | "su640" )
         if [ "`getprop gsm.version.baseband`" == "" ]; then
-            setprop gsm.version.baseband `dd if=/dev/block/mmcblk0p14 bs=128000 skip=4 count=3 | strings |grep "MDM92" | head -1`
+            setprop gsm.version.baseband `dd if=/dev/block/mmcblk0p14 bs=128000  count=10 | strings |grep -- "-MDM92" | head -1`
         fi
     ;;
 esac

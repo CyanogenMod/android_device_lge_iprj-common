@@ -89,9 +89,7 @@ typedef struct preview_stream_ops {
     // and monotonically increasing between two frames in the same
     // preview stream. They do not need to be comparable between
     // consecutive or parallel preview streams, cameras, or app runs.
-#ifndef ICS_CAMERA_BLOB
     int (*set_timestamp)(struct preview_stream_ops *w, int64_t timestamp);
-#endif
 } preview_stream_ops_t;
 
 struct camera_device;

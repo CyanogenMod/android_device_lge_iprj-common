@@ -119,7 +119,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     debug.fb.rgb565=0 \
     debug.sf.hw=1 \
     debug.enabletr=true \
-    debug.composition.type=dyn \
+    debug.composition.type=gpu \
     persist.sys.usb.config=mtp,adb \
     ro.opengles.version=131072 \
     com.qc.hardware=true \
@@ -128,8 +128,10 @@ PRODUCT_PROPERTY_OVERRIDES += \
     com.qc.hdmi_out=true \
     ro.bt.bdaddr_path=/data/misc/bd_addr \
     ro.product.camera=lgp930 \
-    dev.pm.dyn_samplingrate=1 \
-    ro.ril.shutdown=true
+    ro.ril.shutdown=true \
+    debug.mdpcomp.maxlayer=2 \
+    debug.mdpcomp.logs=0
+
 
 PRODUCT_BUILD_PROP_OVERRIDES += BUILD_UTC_DATE=0
 PRODUCT_MANUFACTURER := LGE

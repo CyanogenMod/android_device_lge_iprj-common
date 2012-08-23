@@ -25,7 +25,16 @@
 #include <hardware/hardware.h>
 #include <hardware/power.h>
 
-#define BOOSTPULSE_PATH "/sys/devices/system/cpu/cpufreq/interactive/boostpulse"
+// Uncomment this if we want to default to the ondemand governor
+#define USING_ONDEMAND
+
+#define BOOSTPULSE_INTERACTIVE_PATH "/sys/devices/system/cpu/cpufreq/interactive/boostpulse"
+#define BOOSTPULSE_ONDEMAND_PATH "/sys/devices/system/cpu/cpufreq/ondemand/boostpulse"
+#ifdef USING_ONDEMAND
+#define SAMPLING_RATE_ONDEMAND "/sys/devices/system/cpu/cpufreq/ondemand/sampling_rate"
+#define SAMPLING_RATE_SCREEN_ON "50000"
+#define SAMPLING_RATE_SCREEN_OFF "500000"
+#endif
 
 struct iprj_power_module {
     struct power_module base;
@@ -55,6 +64,44 @@ static void sysfs_write(char *path, char *s)
     close(fd);
 }
 
+static int boostpulse_open(struct iprj_power_module *iprj)
+{
+    char buf[80];
+
+    pthread_mutex_lock(&iprj->lock);
+
+    if (iprj->boostpulse_fd < 0) {
+        iprj->boostpulse_fd = open(BOOSTPULSE_ONDEMAND_PATH, O_WRONLY);
+        if (iprj->boostpulse_fd < 0) {
+            iprj->boostpulse_fd = open(BOOSTPULSE_INTERACTIVE_PATH, O_WRONLY);
+
+            if (iprj->boostpulse_fd < 0 && !iprj->boostpulse_warned) {
+                strerror_r(errno, buf, sizeof(buf));
+                ALOGE("Error opening boostpulse: %s\n", buf);
+                iprj->boostpulse_warned = 1;
+            }
+        }
+    }
+
+    pthread_mutex_unlock(&iprj->lock);
+    return iprj->boostpulse_fd;
+}
+
+#ifdef USING_ONDEMAND
+
+static void iprj_power_init(struct power_module *module)
+{
+    sysfs_write(SAMPLING_RATE_ONDEMAND, SAMPLING_RATE_SCREEN_ON);
+}
+
+static void iprj_power_set_interactive(struct power_module *module, int on)
+{
+    sysfs_write(SAMPLING_RATE_ONDEMAND,
+            on ? SAMPLING_RATE_SCREEN_ON : SAMPLING_RATE_SCREEN_OFF);
+}
+
+#else // interactive
+
 static void iprj_power_init(struct power_module *module)
 {
     /*
@@ -74,28 +121,6 @@ static void iprj_power_init(struct power_module *module)
                 "100000");
 }
 
-static int boostpulse_open(struct iprj_power_module *iprj)
-{
-    char buf[80];
-
-    pthread_mutex_lock(&iprj->lock);
-
-    if (iprj->boostpulse_fd < 0) {
-        iprj->boostpulse_fd = open(BOOSTPULSE_PATH, O_WRONLY);
-
-        if (iprj->boostpulse_fd < 0) {
-            if (!iprj->boostpulse_warned) {
-                strerror_r(errno, buf, sizeof(buf));
-                ALOGE("Error opening %s: %s\n", BOOSTPULSE_PATH, buf);
-                iprj->boostpulse_warned = 1;
-            }
-        }
-    }
-
-    pthread_mutex_unlock(&iprj->lock);
-    return iprj->boostpulse_fd;
-}
-
 static void iprj_power_set_interactive(struct power_module *module, int on)
 {
     /*
@@ -106,6 +131,8 @@ static void iprj_power_set_interactive(struct power_module *module, int on)
     sysfs_write("/sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq",
                 on ? "1512000" : "702000");
 }
+
+#endif
 
 static void iprj_power_hint(struct power_module *module, power_hint_t hint,
                             void *data)
@@ -121,7 +148,7 @@ static void iprj_power_hint(struct power_module *module, power_hint_t hint,
 
 	    if (len < 0) {
 	        strerror_r(errno, buf, sizeof(buf));
-		ALOGE("Error writing to %s: %s\n", BOOSTPULSE_PATH, buf);
+		ALOGE("Error writing to boostpulse: %s\n", buf);
 	    }
 	}
         break;

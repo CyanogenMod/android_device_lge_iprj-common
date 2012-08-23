@@ -64,6 +64,8 @@ PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.wifi.direct.xml:system/etc/permissions/android.hardware.wifi.direct.xml
 
 # HW HALS
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/config/audio_policy.conf:system/vendor/etc/audio_policy.conf
 
 PRODUCT_PACKAGES += \
     hdmid \
@@ -75,7 +77,9 @@ PRODUCT_PACKAGES += \
     copybit.msm8660 \
     lights.iprj \
     gps.iprj \
+    audio.primary.msm8660 \
     audio_policy.msm8660 \
+    audio_policy.conf \
     audio.a2dp.default \
     power.iprj \
     com.android.future.usb.accessory

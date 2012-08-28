@@ -156,7 +156,7 @@
     </string-array>
 
     <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveNotificationLed">true</bool>
+    <bool name="config_intrusiveNotificationLed">false</bool>
 
     <!-- Component name of the default wallpaper. This will be ImageWallpaper if not
                   specified -->

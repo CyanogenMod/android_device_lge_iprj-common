@@ -133,7 +133,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.bt.bdaddr_path=/data/misc/bd_addr \
     ro.product.camera=lgp930 \
     ro.ril.shutdown=true \
-    debug.mdpcomp.maxlayer=2 \
+    debug.mdpcomp.maxlayer=3 \
     debug.mdpcomp.logs=0
 
 

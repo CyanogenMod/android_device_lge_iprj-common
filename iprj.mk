@@ -77,7 +77,7 @@ PRODUCT_PACKAGES += \
     copybit.msm8660 \
     lights.iprj \
     gps.iprj \
-    audio.primary.msm8660 \
+    audio.primary.iprj \
     audio_policy.msm8660 \
     audio_policy.conf \
     audio.a2dp.default \

@@ -50,7 +50,6 @@ on boot
     chown system system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
 
 on init
-    export TMPDIR /data/local/tmp
     export EXTERNAL_STORAGE /storage/sdcard0
 
 # Backward compatibility

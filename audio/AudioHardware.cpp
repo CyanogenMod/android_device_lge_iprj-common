@@ -831,10 +831,14 @@ AudioHardware::AudioHardware() :
             else if((strcmp((char* )name[i],"tty_headset_mono_tx") == 0) || (strcmp((char* )name[i],"tty_headset_tx") == 0)) {
                 index = DEVICE_TTY_HEADSET_MONO_TX;
             }
-            else if((strcmp((char* )name[i],"bt_sco_rx") == 0) || (strcmp((char* )name[i],"bt_sco_mono_rx") == 0)) {
+            else if((strcmp((char* )name[i],"bt_sco_rx") == 0) || (strcmp((char* )name[i],"bt_sco_mono_rx") == 0)
+                        || (strcmp((char* )name[i],"bt_sco_bttm_rx") == 0)
+                   ) {
                 index = DEVICE_BT_SCO_RX;
             }
-            else if((strcmp((char* )name[i],"bt_sco_tx") == 0) || (strcmp((char* )name[i],"bt_sco_mono_tx") == 0)) {
+            else if((strcmp((char* )name[i],"bt_sco_tx") == 0) || (strcmp((char* )name[i],"bt_sco_mono_tx") == 0)
+                        || (strcmp((char* )name[i],"bt_sco_bttm_tx") == 0)
+                   ) {
                 index = DEVICE_BT_SCO_TX;
             }
             else if((strcmp((char*)name[i],"headset_stereo_speaker_stereo_rx") == 0) ||

@@ -778,7 +778,9 @@ AudioHardware::AudioHardware() :
             else if((strcmp((char* )name[i],"speaker_mono_tx") == 0) || (strcmp((char* )name[i],"handset_record_tx") == 0)) {
                 index = DEVICE_SPEAKER_TX;
             }
-            else if((strcmp((char* )name[i],"headset_stereo_rx") == 0) || (strcmp((char* )name[i],"headset_rx") == 0)) {
+            else if((strcmp((char* )name[i],"headset_stereo_rx") == 0) || (strcmp((char* )name[i],"headset_rx") == 0)
+                    || (strcmp((char*)name[i],"headset_stereo_rx_playback") == 0)
+		) {
                 index = DEVICE_HEADSET_RX;
             }
             else if((strcmp((char* )name[i],"headset_mono_tx") == 0) || (strcmp((char* )name[i],"headset_tx") == 0)) {
@@ -842,7 +844,6 @@ AudioHardware::AudioHardware() :
                 index = DEVICE_BT_SCO_TX;
             }
             else if((strcmp((char*)name[i],"headset_stereo_speaker_stereo_rx") == 0) ||
-                    (strcmp((char*)name[i],"headset_stereo_rx_playback") == 0) ||
                     (strcmp((char*)name[i],"headset_speaker_stereo_rx") == 0) || (strcmp((char*)name[i],"speaker_headset_rx") == 0)) {
                 index = DEVICE_SPEAKER_HEADSET_RX;
             }

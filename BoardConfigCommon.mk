@@ -46,19 +46,11 @@ USE_OPENGL_RENDERER := true
 
 # QCOM stuffs
 BOARD_USES_QCOM_HARDWARE := true
-TARGET_USES_OVERLAY := true
-TARGET_HAVE_BYPASS  := true
 TARGET_USES_C2D_COMPOSITION := true
-TARGET_USES_GENLOCK := true
-TARGET_QCOM_HDMI_OUT := true
-TARGET_QCOM_HDMI_RESOLUTION_AUTO := true
-TARGET_FORCE_CPU_UPLOAD := false
+TARGET_FORCE_CPU_UPLOAD := true
 BOARD_USES_QCOM_LIBS := true
 BOARD_EGL_CFG := device/lge/iprj-common/egl.cfg
 TARGET_USES_ION := true
-TARGET_NO_BYPASS_CROPPING := true
-
-DYNAMIC_SHARED_LIBV8SO := true
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211
@@ -105,3 +97,5 @@ BOARD_LEGACY_NL80211_STA_EVENTS := true
 
 # mmc_erase sometimes hangs and requires a reboot, so skip it
 BOARD_SUPPRESS_EMMC_WIPE := true
+
+ENABLE_WEBGL := true

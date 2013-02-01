@@ -23,7 +23,9 @@ $(call inherit-product, build/target/product/full.mk)
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.iprj.rc:root/init.iprj.rc \
-    $(LOCAL_PATH)/ueventd.iprj.rc:root/ueventd.iprj.rc
+    $(LOCAL_PATH)/ueventd.iprj.rc:root/ueventd.iprj.rc \
+    $(LOCAL_PATH)/fstab.iprj:root/fstab.iprj \
+    $(LOCAL_PATH)/vold.fstab:system/etc/vold.fstab
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.iprj.usb.rc:root/init.iprj.usb.rc \
@@ -96,13 +98,7 @@ PRODUCT_PACKAGES += \
     libmm-omxcore \
     libOmxCore
 
-# Bluetooth
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/prebuilt/init.qcom.bt.sh:system/bin/init.qcom.bt.sh
-
 PRODUCT_PACKAGES += \
-    hcitool \
-    hciconfig \
     hwaddrs
 
 # Charger mode
@@ -115,7 +111,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.sf.lcd_density=320 \
     mobiledata.interfaces=rmnet_sdio0,rmnet_sdio1 \
     rild.libpath=/system/lib/libril-qc-qmi-1.so \
-    rild.libargs=-d /dev/smd0 \
     DEVICE_PROVISIONED=1 \
     ro.telephony.ril_class=LGEQualcommUiccRIL \
     ro.telephony.ril.v3=qcomuiccstack \

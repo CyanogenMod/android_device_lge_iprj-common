@@ -1048,15 +1048,16 @@ status_t AudioHardware::initCheck()
 }
 
 AudioStreamOut* AudioHardware::openOutputStream(
-        uint32_t devices, audio_output_flags_t flags, int *format, uint32_t *channels, uint32_t *sampleRate, status_t *status)
+        uint32_t devices, int *format, uint32_t *channels, uint32_t *sampleRate, status_t *status)
 {
     { // scope for the lock
+	audio_output_flags_t flags = static_cast<audio_output_flags_t> (*status);
         status_t lStatus;
         Mutex::Autolock lock(mLock);
 #ifdef QCOM_VOIP_ENABLED
         // only one output stream allowed
         if (mOutput && !((flags & AUDIO_OUTPUT_FLAG_DIRECT) && (flags & AUDIO_OUTPUT_FLAG_VOIP_RX))
-                    && !(flags & AUDIO_OUTPUT_FLAG_LPA)) {
+                    /*&& !(flags & AUDIO_OUTPUT_FLAG_LPA)*/) {
             if (status) {
                 *status = INVALID_OPERATION;
             }
@@ -1087,7 +1088,7 @@ AudioStreamOut* AudioHardware::openOutputStream(
             return mDirectOutput;
         } else
 #endif
-	    if (flags & AUDIO_OUTPUT_FLAG_LPA) {
+	    /*if (flags & AUDIO_OUTPUT_FLAG_LPA) {
 			status_t err = BAD_VALUE;
 #if 0
             if (mOutput) {
@@ -1111,7 +1112,7 @@ AudioStreamOut* AudioHardware::openOutputStream(
             mOutputLPA = out;
             return mOutputLPA;
 
-        } else {
+        } else*/ {
 #if 0
             ALOGV(" AudioHardware::openOutputStream AudioStreamOutMSM8x60 output stream \n");
             // only one output stream allowed
@@ -3057,6 +3058,7 @@ status_t AudioHardware::AudioStreamOutMSM8x60::standby()
         return -1;
     }
     deleteFromTable(PCM_PLAY);
+    updateDeviceInfo(cur_rx, cur_tx);
     if(!getNodeByStreamType(VOICE_CALL)
 #ifdef QCOM_TUNNEL_LPA_ENABLED
        && !getNodeByStreamType(LPA_DECODE)
@@ -3072,10 +3074,12 @@ status_t AudioHardware::AudioStreamOutMSM8x60::standby()
     //in case if ANC don't disable cur device.
       if (anc_running == false){
 #endif
+#if 0
         if(enableDevice(cur_rx, 0)) {
             ALOGE("Disabling device failed for cur_rx %d", cur_rx);
             return 0;
         }
+#endif
 #ifdef QCOM_ANC_HEADSET_ENABLED
       }
 #endif

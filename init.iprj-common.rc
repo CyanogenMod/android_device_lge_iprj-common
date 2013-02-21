@@ -166,6 +166,7 @@ service kickstart /system/bin/qcks l
 on property:ro.baseband=csfb
     wait /dev/ttyHSL1
     mkdir /data/qcks 0770 system system
+    write /sys/module/subsystem_restart/parameters/restart_level 2
     start kickstart
 
 on property:dev.bootcomplete=1

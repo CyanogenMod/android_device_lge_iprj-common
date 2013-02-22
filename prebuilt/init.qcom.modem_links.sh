@@ -75,7 +75,7 @@ case $linksNeeded in
    1)
       cd /firmware/image
       # Changed partition layout and size, 20110521
-      mount -t ext4 -o remount,rw,barrier=0 /dev/block/mmcblk0p27 /system
+      mount -o remount,rw /system /system
 
       #Adjust permissions for select files
       chmod 4755 /system/bin/diag_mdlog
@@ -120,7 +120,7 @@ case $linksNeeded in
 
       #remount file system as read only
       # Changed partition layout and size, 20110521
-      mount -t ext4 -o remount,ro,barrier=0 /dev/block/mmcblk0p27 /system
+      mount -o remount,ro /system /system
       break;;
 
    *)

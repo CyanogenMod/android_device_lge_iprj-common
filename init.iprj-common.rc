@@ -70,24 +70,17 @@ on init
     symlink /system/bin /bin
 
 on fs
+    wait /dev/block/mmcblk0
     mkdir /system
-    wait /dev/block/mmcblk0p30
-    wait /dev/block/mmcblk0p12
-    wait /dev/block/mmcblk0p28
     mkdir /persist 0771 system system
     mkdir /mpt 0771 system system
-    wait /dev/block/mmcblk0p31
-   mkdir /tombstones 0771 system system
-
-   mkdir /tombstones/modem 0771 system system
-   mkdir /tombstones/mdm 0771 system system
-   mkdir /tombstones/lpass 0771 system system
-   mkdir /firmware 0771 system system
-   wait /dev/block/mmcblk0p1
-    mount_all ./fstab.iprj
-   exec /system/bin/sh /system/etc/init.qcom.modem_links.sh
-
-
+    mkdir /tombstones 0771 system system
+    mkdir /tombstones/modem 0771 system system
+    mkdir /tombstones/mdm 0771 system system
+    mkdir /tombstones/lpass 0771 system system
+    mkdir /firmware 0771 system system
+    mount_all fstab.iprj
+    exec /system/bin/sh /system/etc/init.qcom.modem_links.sh
 
 on post-fs
     # mpt partition attribute

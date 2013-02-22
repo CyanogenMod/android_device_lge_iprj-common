@@ -32,7 +32,8 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/prebuilt/init.qcom.sh:root/init.qcom.sh \
     $(LOCAL_PATH)/prebuilt/init.qcom.post_boot.sh:system/etc/init.qcom.post_boot.sh \
     $(LOCAL_PATH)/prebuilt/init.qcom.modem_links.sh:system/etc/init.qcom.modem_links.sh \
-    $(LOCAL_PATH)/prebuilt/init.qcom.mdm_links.sh:system/etc/init.qcom.mdm_links.sh
+    $(LOCAL_PATH)/prebuilt/init.qcom.mdm_links.sh:system/etc/init.qcom.mdm_links.sh \
+    $(LOCAL_PATH)/prebuilt/init.qcom.baseband.sh:system/etc/init.qcom.baseband.sh
 
 ## Configs
 PRODUCT_COPY_FILES += \

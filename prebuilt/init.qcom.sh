@@ -26,8 +26,6 @@
 # ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #
 
-#platform.team@lge.com 2011.02.15
-setprop ro.sf.lcd_density 320
 #
 # start ril-daemon only for targets on which radio is present
 #
@@ -74,7 +72,7 @@ case "$usbchgdisabled" in
     "") ;; #Do nothing here
     * )
     case $target in
-        "msm8660_surf" | "msm8660_csfb" | "i_atnt" | "hdk_8x60" | "i_skt" | "i_dcm")
+        "msm8660_surf" | "msm8660_csfb" | "hdk_8x60" | "i_atnt" | "i_skt" | "i_vzw" | "i_dcm" | "p930" | "su640" | "vs920" )
 		#platform.team@lge.com
         echo "$usbchgdisabled" > /sys/module/pmic8058_charger/parameters/disabled
         echo "$usbchgdisabled" > /sys/module/smb137b/parameters/disabled

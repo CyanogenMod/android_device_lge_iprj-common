@@ -81,6 +81,7 @@ on fs
     mkdir /firmware 0771 system system
     mount_all fstab.iprj
     exec /system/bin/sh /system/etc/init.qcom.modem_links.sh
+    exec /system/bin/sh /system/etc/init.qcom.mdm_links.sh
 
 on post-fs
     # mpt partition attribute
@@ -165,8 +166,10 @@ service kickstart /system/bin/qcks l
 on property:ro.baseband=csfb
     wait /dev/ttyHSL1
     mkdir /data/qcks 0770 system system
-    exec /system/bin/sh /system/etc/init.qcom.mdm_links.sh
     start kickstart
+
+on property:dev.bootcomplete=1
+    exec /system/bin/sh /system/etc/init.qcom.baseband.sh
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
     class main

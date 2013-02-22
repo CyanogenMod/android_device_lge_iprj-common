@@ -22,9 +22,8 @@ PRODUCT_COPY_FILES += \
 $(call inherit-product, build/target/product/full.mk)
 
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/init.iprj.rc:root/init.iprj.rc \
+    $(LOCAL_PATH)/init.iprj-common.rc:root/init.iprj-common.rc \
     $(LOCAL_PATH)/ueventd.iprj.rc:root/ueventd.iprj.rc \
-    $(LOCAL_PATH)/fstab.iprj:root/fstab.iprj \
     $(LOCAL_PATH)/vold.fstab:system/etc/vold.fstab
 
 PRODUCT_COPY_FILES += \
@@ -40,7 +39,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/config/vold.fstab:system/etc/vold.fstab \
     $(LOCAL_PATH)/config/atcmd_virtual_kbd.kl:system/usr/keylayout/atcmd_virtual_kbd.kl \
     $(LOCAL_PATH)/config/ffa-keypad_qwerty.kl:system/usr/keylayout/ffa-keypad_qwerty.kl \
-    $(LOCAL_PATH)/config/i_atnt-keypad.kl:system/usr/keylayout/i_atnt-keypad.kl \
     $(LOCAL_PATH)/config/pmic8058_pwrkey.kl:system/usr/keylayout/pmic8058_pwrkey.kl \
     $(LOCAL_PATH)/config/synaptics_ts.kl:system/usr/keylayout/touch_dev.kl \
     $(LOCAL_PATH)/config/synaptics_ts.idc:system/usr/idc/touch_dev.idc \

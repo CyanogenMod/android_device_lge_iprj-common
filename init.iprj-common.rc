@@ -240,6 +240,7 @@ service wpa_supplicant /system/bin/wpa_supplicant \
     oneshot
 
 on property:dev.bootcomplete=1
+    stop bootanim
     exec /system/bin/hwaddrs
 
 service ami304d /system/bin/ami304d

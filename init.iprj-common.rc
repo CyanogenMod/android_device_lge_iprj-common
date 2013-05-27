@@ -152,9 +152,6 @@ service qcom-post-boot /system/bin/sh /system/etc/init.qcom.post_boot.sh
     disabled
     oneshot
 
-on property:init.svc.bootanim=stopped
-    start qcom-post-boot
-
 service kickstart /system/bin/qcks l
     class core
     user system
@@ -171,6 +168,7 @@ on property:ro.baseband=csfb
 
 on property:dev.bootcomplete=1
     exec /system/bin/sh /system/etc/init.qcom.baseband.sh
+    start qcom-post-boot
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp
     class main

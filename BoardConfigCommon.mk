@@ -11,6 +11,7 @@ TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH_VARIANT := armv7-a-neon
 ARCH_ARM_HAVE_TLS_REGISTER := true
 TARGET_CPU_SMP := true
+TARGET_CPU_VARIANT := cortex-a8
 
 TARGET_NO_RADIOIMAGE := true
 TARGET_GLOBAL_CFLAGS += -mfpu=neon -mfloat-abi=softfp
@@ -103,5 +104,5 @@ ENABLE_WEBGL := true
 
 TARGET_QCOM_DISPLAY_VARIANT := caf
 TARGET_QCOM_AUDIO_VARIANT := caf
-BOARD_HAVE_OLD_ION_API := true
+TARGET_HAS_OLD_QCOM_ION := true
 BOARD_BLUEDROID_VENDOR_CONF := device/lge/iprj-common/vnd_bt.txt

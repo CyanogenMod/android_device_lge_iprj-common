@@ -145,12 +145,5 @@
         <item>"7,1"</item>
     </string-array>
 
-    <!-- Is the notification LED intrusive? Used to decide if there should be a disable option -->
-    <bool name="config_intrusiveNotificationLed">true</bool>
-
-    <!-- Component name of the default wallpaper. This will be ImageWallpaper if not
-                  specified -->
-    <string name="default_wallpaper_component">com.android.phasebeam/.PhaseBeamWallpaper</string>
-
-    <bool translatable="false" name="config_wifi_p2p_support">true</bool>
+    <integer name="config_deviceHardwareKeys">7</integer>
 </resources>

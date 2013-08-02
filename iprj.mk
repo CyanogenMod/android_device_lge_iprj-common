@@ -23,8 +23,7 @@ $(call inherit-product, build/target/product/full.mk)
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.iprj-common.rc:root/init.iprj-common.rc \
-    $(LOCAL_PATH)/ueventd.iprj.rc:root/ueventd.iprj.rc \
-    $(LOCAL_PATH)/vold.fstab:system/etc/vold.fstab
+    $(LOCAL_PATH)/ueventd.iprj.rc:root/ueventd.iprj.rc
 
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/init.iprj.usb.rc:root/init.iprj.usb.rc \

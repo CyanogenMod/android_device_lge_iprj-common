@@ -72,6 +72,13 @@ enum ion_heap_type {
 
 enum ion_heap_ids {
 	INVALID_HEAP_ID = -1,
+	/* In a system with the "Mini Ion Upgrade" (such as this one)
+	 * the heap_mask and caching flag end up sharing a spot in
+	 * ion_allocation_data.flags. We should make sure to never use
+	 * the 0th bit for a heap because that's where the caching bit
+	 * ends up.
+	 */
+	ION_BOGUS_HEAP_DO_NOT_USE = 0,
 	ION_CP_MM_HEAP_ID = 8,
 	ION_CP_MFC_HEAP_ID = 12,
 	ION_CP_WB_HEAP_ID = 16, /* 8660 only */
@@ -688,6 +695,14 @@ static inline int msm_ion_do_cache_op(struct ion_client *client,
 struct ion_allocation_data {
 	size_t len;
 	size_t align;
+	unsigned int heap_mask;
+	unsigned int flags;
+	struct ion_handle *handle;
+};
+
+struct ion_allocation_data_old {
+	size_t len;
+	size_t align;
 	unsigned int flags;
 	struct ion_handle *handle;
 };
@@ -772,6 +787,8 @@ struct ion_flag_data {
  */
 #define ION_IOC_ALLOC		_IOWR(ION_IOC_MAGIC, 0, \
 				      struct ion_allocation_data)
+#define ION_IOC_ALLOC_COMPAT	_IOWR(ION_IOC_MAGIC, 0, \
+				      struct ion_allocation_data_old)
 
 /**
  * DOC: ION_IOC_FREE - free memory

@@ -37,6 +37,8 @@ on boot
     chmod 0660 /proc/bluetooth/sleep/btwrite
     chown bluetooth bluetooth /proc/bluetooth/sleep/lpm
     chown bluetooth bluetooth /proc/bluetooth/sleep/btwrite
+    restorecon /proc/bluetooth/sleep/lpm
+    restorecon /proc/bluetooth/sleep/btwrite
 
     chmod 0444 /proc/cmdline
     chown system system /sys/devices/platform/msm-charger/at_charge
@@ -80,8 +82,17 @@ on fs
     mkdir /tombstones/lpass 0771 system system
     mkdir /firmware 0771 system system
     mount_all fstab.iprj
-    exec /system/bin/sh /system/etc/init.qcom.modem_links.sh
-    exec /system/bin/sh /system/etc/init.qcom.mdm_links.sh
+    class_start modem
+
+service mdm_script1 /system/bin/sh /system/etc/init.qcom.modem_links.sh
+    class modem
+    seclabel u:r:kickstart:s0
+    oneshot
+
+service mdm_script2 /system/bin/sh /system/etc/init.qcom.mdm_links.sh
+    class modem
+    seclabel u:r:kickstart:s0
+    oneshot
 
 on post-fs
     # mpt partition attribute
@@ -157,6 +168,7 @@ service kickstart /system/bin/qcks l
     user system
     group system
     oneshot
+    seclabel u:r:kickstart:s0
     disabled
 
 # Start kickstart if csfb or svlte2a target
@@ -166,8 +178,12 @@ on property:ro.baseband=csfb
     write /sys/module/subsystem_restart/parameters/restart_level 2
     start kickstart
 
+service mdm_script3 /system/bin/sh /system/etc/init.qcom.baseband.sh
+    seclabel u:r:kickstart:s0
+    oneshot
+
 on property:dev.bootcomplete=1
-    exec /system/bin/sh /system/etc/init.qcom.baseband.sh
+    start mdm_script3
     start qcom-post-boot
 
 service mpdecision /system/bin/mpdecision --no_sleep --avg_comp

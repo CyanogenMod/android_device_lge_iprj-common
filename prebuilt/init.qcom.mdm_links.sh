@@ -37,7 +37,7 @@ mount -o remount,rw /system /system
 mkdir /system/etc/firmware/misc_mdm
 chmod 771  /system/etc/firmware/misc_mdm
 chown system.system /system/etc/firmware/misc_mdm
-mount -t vfat -o ro,shortname=lower,umask=0027,uid=1000,gid=1000 /dev/block/mmcblk0p14 /system/etc/firmware/misc_mdm	#rwxrwxr--
+mount -t vfat -o ro,shortname=lower,umask=0027,uid=1000,gid=1000,context=u:object_r:radio_efs_file:s0 /dev/block/mmcblk0p14 /system/etc/firmware/misc_mdm	#rwxrwxr--
 
 MISC_MDM=/system/etc/firmware/misc_mdm/image
 cd $MISC_MDM

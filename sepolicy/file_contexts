@@ -78,3 +78,7 @@
 /persist(/.*)?                   u:object_r:persist_file:s0
 
 /dev/oncrpc(/.*)?                u:object_r:oncrpc_device:s0
+
+# Hardware tunables
+/sys/class/timed_output/vibrator/amp        u:object_r:sysfs_writable:s0
+

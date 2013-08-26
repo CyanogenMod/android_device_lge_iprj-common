@@ -81,4 +81,4 @@
 
 # Hardware tunables
 /sys/class/timed_output/vibrator/amp        u:object_r:sysfs_writable:s0
-
+/sys/devices/platform/mdp.524801/kcal       u:object_r:sysfs_writable:s0

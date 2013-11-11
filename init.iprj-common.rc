@@ -58,14 +58,13 @@ on boot
 on early-init
     mkdir /storage 0050 system sdcard_r
     mkdir /mnt/shell/sdcard 0700 shell shell
-    mkdir /storage/sdcard 0555 root root
+    mkdir /storage/sdcard0 0555 root root
 
-    export EXTERNAL_STORAGE /storage/sdcard
+    export EXTERNAL_STORAGE /storage/sdcard0
 
     # Support legacy paths
-    symlink /storage/sdcard /sdcard
-    symlink /storage/sdcard /mnt/sdcard
-    symlink /storage/sdcard /storage/sdcard0
+    symlink /storage/sdcard0 /sdcard
+    symlink /storage/sdcard0 /mnt/sdcard
 
 on init
 # Backward compatibility

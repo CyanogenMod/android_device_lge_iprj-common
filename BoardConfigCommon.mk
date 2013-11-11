@@ -36,7 +36,7 @@ BOARD_USERDATAIMAGE_PARTITION_SIZE := 2004621312
 BOARD_FLASH_BLOCK_SIZE := 131072
 
 BOARD_HAS_NO_SELECT_BUTTON := true
-#BOARD_TOUCH_RECOVERY := true
+BOARD_RECOVERY_SWIPE := true
 BOARD_CUSTOM_GRAPHICS := ../../../device/lge/iprj-common/recovery-gfx.c
 TARGET_USERIMAGES_USE_EXT4 := true
 
@@ -140,3 +140,4 @@ BOARD_SEPOLICY_UNION += \
 	wpa_supplicant.te
 
 BOARD_HARDWARE_CLASS := device/lge/iprj-common/cmhw/
+

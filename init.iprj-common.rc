@@ -55,10 +55,11 @@ on boot
     # PowerHAL perms
     chown system system /sys/devices/system/cpu/cpufreq/ondemand/sampling_rate
 
-on early-init
-    mkdir /storage 0050 system sdcard_r
-    mkdir /mnt/shell/sdcard 0700 shell shell
-    mkdir /storage/sdcard0 0555 root root
+on init
+# Backward compatibility
+    symlink /system/bin /bin
+
+    # See storage config details at http://source.android.com/tech/storage/
 
     export EXTERNAL_STORAGE /storage/sdcard0
 
@@ -66,9 +67,9 @@ on early-init
     symlink /storage/sdcard0 /sdcard
     symlink /storage/sdcard0 /mnt/sdcard
 
-on init
-# Backward compatibility
-    symlink /system/bin /bin
+    chmod 0701 /mnt/media_rw
+    mkdir /mnt/media_rw/sdcard0 0775 system system
+    mkdir /storage/sdcard0 0000 system system
 
 on fs
     wait /dev/block/mmcblk0
@@ -267,6 +268,10 @@ service ami304d /system/bin/ami304d
 service hdmid /system/bin/hdmid
     class late_start
     socket hdmid stream 0660 root system graphics
+    disabled
+
+service fuse_sdcard0 /system/bin/sdcard -u 1023 -g 1023 /mnt/media_rw/sdcard0 /storage/sdcard0
+    class late_start
     disabled
 
 #on property:ro.hdmi.enable=true

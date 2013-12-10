@@ -80,18 +80,8 @@ on fs
     mkdir /tombstones/mdm 0771 system system
     mkdir /tombstones/lpass 0771 system system
     mkdir /firmware 0771 system system
+    mkdir /modem 0771 system system
     mount_all fstab.iprj
-    class_start modem
-
-service mdm_script1 /system/bin/sh /system/etc/init.qcom.modem_links.sh
-    class modem
-    seclabel u:r:kickstart:s0
-    oneshot
-
-service mdm_script2 /system/bin/sh /system/etc/init.qcom.mdm_links.sh
-    class modem
-    seclabel u:r:kickstart:s0
-    oneshot
 
 on post-fs
     # mpt partition attribute

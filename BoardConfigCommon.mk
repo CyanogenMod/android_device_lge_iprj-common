@@ -87,6 +87,7 @@ BOARD_HAVE_BACK_MIC_CAMCORDER := true
 
 COMMON_GLOBAL_CFLAGS += -DICS_CAMERA_BLOB -DQCOM_ACDB_ENABLED
 BOARD_NEEDS_MEMORYHEAPPMEM := true
+COMMON_GLOBAL_CFLAGS += -DNEEDS_VECTORIMPL_SYMBOLS
 
 ## This is evil. The mt9m114 (FFC) data inside the liboemcamera blob is in the .bss section,
 ## and inaccessible if PIE is enabled

@@ -183,3 +183,5 @@
 
 /dev/ion                  0664   system     system
 /dev/pn544                0600   nfc        nfc
+
+/dev/rtc0                 0660   system     system

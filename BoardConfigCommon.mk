@@ -53,6 +53,7 @@ TARGET_FORCE_CPU_UPLOAD := true
 BOARD_USES_QCOM_LIBS := true
 BOARD_EGL_CFG := device/lge/iprj-common/egl.cfg
 TARGET_USES_ION := true
+BOARD_USES_QC_TIME_SERVICES := true
 
 # Wifi related defines
 BOARD_WPA_SUPPLICANT_DRIVER := NL80211

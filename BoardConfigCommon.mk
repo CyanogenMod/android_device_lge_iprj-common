@@ -109,6 +109,7 @@ TARGET_QCOM_AUDIO_VARIANT := caf
 BOARD_USES_LEGACY_ALSA_AUDIO := true
 BOARD_BLUEDROID_VENDOR_CONF := device/lge/iprj-common/vnd_bt.txt
 TARGET_DISPLAY_INSECURE_MM_HEAP := true
+TARGET_DISPLAY_USE_RETIRE_FENCE := true
 
 BOARD_SEPOLICY_DIRS += \
         device/lge/iprj-common/sepolicy

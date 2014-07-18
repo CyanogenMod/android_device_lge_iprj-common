@@ -151,5 +151,8 @@
         <item>"7,1"</item>
     </string-array>
 
+    <!-- Indicate whether the SD card is accessible without removing the battery. -->
+    <bool name="config_batterySdCardAccessibility">true</bool>
+
     <integer name="config_deviceHardwareKeys">7</integer>
 </resources>
